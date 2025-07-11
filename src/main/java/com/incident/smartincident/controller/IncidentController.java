@@ -21,6 +21,7 @@ public class IncidentController {
      * @param incidentService is the service layer to handle incident logic
      */
     public IncidentController(IncidentService incidentService) {
+        System.out.println("✅ IncidentController constructor initialized");
         this.incidentService = incidentService;
     }
 
@@ -40,8 +41,12 @@ public class IncidentController {
      * @return a List of all Incidents
      */
     @GetMapping
-    public List<Incident> getAllIncidents() {
-        return incidentService.getAllIncidents();
+    public List<Incident> getAllIncidents(@RequestParam(required = false) String severity) {
+        if (severity != null) {
+            return incidentService.getIncidentsBySeverity(severity);
+        } else {
+            return incidentService.getAllIncidents();
+        }
     }
 
     /**

@@ -8,6 +8,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+
+/***
+ *
+ * Service --> handles business logic (validation, transformations, etc.)
+ */
 @Service
 public class IncidentService {
     // our local and private incidentRepository object used for our service
@@ -27,6 +32,10 @@ public class IncidentService {
     // method used to return individual incident based on ID, if exists
     public Optional<Incident> getIncidentById(int id) {
         return incidentRepository.findById(id);
+    }
+
+    public List<Incident> getIncidentsBySeverity(String severity) {
+        return incidentRepository.findBySeverityIgnoreCase(severity);
     }
 
     // method used to create and save or update an incident
